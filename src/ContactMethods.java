@@ -5,7 +5,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
+
+import java.util.ResourceBundle;
 
 public class ContactMethods {
     private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
@@ -13,8 +14,11 @@ public class ContactMethods {
 
     private HashMap<String, Contact> contacts = new HashMap<>();
 
-    public ContactMethods() {
-        List<String> listOfContacts = new ArrayList<>();
+
+    Util util = new Util();
+
+  public ContactMethods(){
+       List<String> listOfContacts = new ArrayList<>();
         try {
             listOfContacts = Files.readAllLines(FILE_PATH);
         } catch (IOException ioe) {
@@ -25,6 +29,7 @@ public class ContactMethods {
             contacts.putIfAbsent(contact.getPhoneNumber(), contact);
         }
     }
+
 
     //save, add, remove, find
     public void saveContacts() {
@@ -54,3 +59,9 @@ public class ContactMethods {
         }
     }
 }
+ 
+ 
+
+ 
+
+ 
