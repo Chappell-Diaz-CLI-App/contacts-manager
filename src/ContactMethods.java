@@ -5,13 +5,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class ContactMethods {
     private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
     private static final Path FILE_PATH = Paths.get(FILE_PATH_STRING);
 
     private HashMap<String, Contact> contacts = new HashMap<>();
-
+    Util util = new Util();
     public ContactMethods(){
         List<String> listOfContacts = new ArrayList<>();
         try {
@@ -28,13 +29,9 @@ public class ContactMethods {
 public void saveContacts(){
 
 }
-public void addContacts(Contact c){
 
-}
 public void contactList(){
 
 }
-public Contact findContact(){
 
-}
 }
