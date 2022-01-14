@@ -24,7 +24,6 @@ public class Util {
         return  (inputString.equalsIgnoreCase("y") || inputString.equalsIgnoreCase("true") || inputString.equalsIgnoreCase("yes"));
     }
     public int getInt(){
-        int inputInt = sc.nextInt();
-        return inputInt;
+        return sc.nextInt();
     }
 }

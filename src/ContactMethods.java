@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import java.util.ResourceBundle;
 
 public class ContactMethods {
@@ -12,26 +13,55 @@ public class ContactMethods {
     private static final Path FILE_PATH = Paths.get(FILE_PATH_STRING);
 
     private HashMap<String, Contact> contacts = new HashMap<>();
+
+
     Util util = new Util();
-    public ContactMethods(){
-        List<String> listOfContacts = new ArrayList<>();
+
+  public ContactMethods(){
+       List<String> listOfContacts = new ArrayList<>();
         try {
             listOfContacts = Files.readAllLines(FILE_PATH);
-        }catch(IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        for(String contactString : listOfContacts){
+        for (String contactString : listOfContacts) {
             Contact contact = new Contact(contactString);
             contacts.putIfAbsent(contact.getPhoneNumber(), contact);
         }
     }
-//save, add, remove, find
-public void saveContacts(){
 
+
+    //save, add, remove, find
+    public void saveContacts() {
+
+    }
+
+    public void addContacts(Contact c) {
+
+    }
+
+    public void contactList() {
+
+    }
+
+    public void searchContacts() {
+        List<String> listOfContacts;
+        try {
+            listOfContacts = Files.readAllLines(FILE_PATH);
+            for (String person : listOfContacts) {
+                if (person.toLowerCase().contains(searchContacts().getName()).toLowerCase()) {
+                    System.out.println("Contact:\n" + person);
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+ 
+ 
 
-public void contactList(){
+ 
 
-}
-
-}
+ 

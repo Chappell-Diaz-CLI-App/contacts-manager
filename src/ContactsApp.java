@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class ContactsApp{
@@ -54,7 +55,19 @@ public class ContactsApp{
             System.out.println("\nWelcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
                     "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
             int option = util.getInt();
+
             // System.out.println("You selected: " + option);
+            switch(option){
+                case 1:
+                    displayContacts();
+
+            
+           /**---------------------------------------- */
+            if(option <= 0 || option >= 6){
+                System.out.println("Invalid selection!");
+            }
+           /**-----------------------------------------*/
+            //reading from text turns strings creating a new arraylist and add to contacts
             switch(option){
                 case 1:
                     displayContacts();
@@ -63,8 +76,10 @@ public class ContactsApp{
                     addContact();
                     break;
                 case 3:
+                    findContact();
                     break;
                 case 4:
+                    searchContacts();
                     break;
                 case 5:
                     running = false;
@@ -83,9 +98,14 @@ public class ContactsApp{
         }
         System.out.println("Goodbye!");
     }
-    /* */
-    public static void getContacts(){
-        List<String> contactStrings;
+
+
+    private static void findContact() {
+    }
+
+    public static void viewContacts(){
+        Path contactsPath = Paths.get("contactList", "contacts.txt");
+        List<String> contactList = null;
         try {
             contactStrings = Files.readAllLines(FILE_PATH);
             for(String contact : contactStrings){
@@ -123,5 +143,8 @@ public class ContactsApp{
         }
         Files.write(FILE_PATH, stringedContacts);
     }
+ 
+//search and delete
+ 
 
 }
