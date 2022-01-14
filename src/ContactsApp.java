@@ -103,9 +103,8 @@ public class ContactsApp{
     private static void findContact() {
     }
 
-    public static void viewContacts(){
-        Path contactsPath = Paths.get("contactList", "contacts.txt");
-        List<String> contactList = null;
+    public static void getContacts(){
+        List<String> contactStrings;
         try {
             contactStrings = Files.readAllLines(FILE_PATH);
             for(String contact : contactStrings){
@@ -115,9 +114,6 @@ public class ContactsApp{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-    }
     // Displays the table of contacts based on the current ArrayList mycontacts
     public static void displayContacts(){
         System.out.println("Name\t|\t Phone Number\n-------------------------");
