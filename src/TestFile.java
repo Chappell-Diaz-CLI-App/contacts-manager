@@ -17,12 +17,12 @@ public class TestFile {
             ioe.printStackTrace();
         }
         Path txt = Paths.get(contactFilePath, "contacts.txt");
-    try{
+        try{
         if(Files.notExists(txt)){
             Files.createFile(txt);
         }
-    }catch(IOException ioe){
+        }catch(IOException ioe){
         ioe.printStackTrace();
-    }
+        }
   }
 }
