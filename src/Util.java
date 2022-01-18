@@ -5,15 +5,15 @@ public class Util {
 
     public String getString() {
         System.out.println("Please enter something.");
-        String userResponse = sc.nextLine();
-        System.out.printf("You have entered: %s", userResponse);
+        String userResponse = sc.next();
+       // System.out.printf("You have entered: %s", userResponse);
         return userResponse;
     }
 
     public String getString(String prompt) {
         System.out.println(prompt);
-        String userResponse = sc.nextLine();
-        System.out.printf("You have entered: %s", userResponse);
+        String userResponse = sc.next();
+        //System.out.printf("You have entered: %s", userResponse);
         return userResponse;
     }
 

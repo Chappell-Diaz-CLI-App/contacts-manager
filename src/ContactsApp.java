@@ -39,7 +39,7 @@ public class ContactsApp{
         Contact c;
         /**----------------------------*/
 
-
+ 
         Boolean goOn;
 
         do {
@@ -115,6 +115,7 @@ public class ContactsApp{
         }
         Files.write(FILE_PATH, stringedContacts);
     }
+ 
 
 //search and delete
     public static void searchContacts(){
@@ -136,5 +137,6 @@ public class ContactsApp{
         System.out.println("________________________");
         System.out.println("redirect to main");
     }
+ 
 
 }
