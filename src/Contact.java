@@ -8,7 +8,7 @@ public class Contact {
     }
 
     public Contact(String fileEntry) {
-        String[] data = fileEntry.split(" | ");
+        String[] data = fileEntry.split("\\|");
         this.fullName = data[0];
         this.phoneNumber = data[data.length - 1];
     }
