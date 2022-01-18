@@ -28,15 +28,17 @@ public class ContactsApp{
             try{
                 Files.createFile(FILE_PATH);
             }catch(IOException ioe){
-                ioe.printStackTrace();
+                   ioe.printStackTrace();
             }
         }else {
             System.out.println("has already been created");
         }
+
         String fullName;
         String phoneNumber;
         Contact c;
         /*----------------------------*/
+
         getContacts();
 
         Boolean running = true;
@@ -67,7 +69,10 @@ public class ContactsApp{
                 default:
                     System.out.println("Switch fallthrough has occurred for option");
             };
+
             /* ---------Loop Exit --------*/
+
+
         }
 
         /* --------- Call to write contacts to the .txt output --------*/
@@ -98,6 +103,7 @@ public class ContactsApp{
         System.out.println("Name               |\tPhone Number\n-------------------------------------");
         for(Contact contact : myContacts){
             System.out.println(String.format("%-18s %s",contact.getFullName(),"|\t"+contact.getPhoneNumber()));
+
         }
     }
     // Called when add new contact option is selected
@@ -161,6 +167,5 @@ public class ContactsApp{
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
 }
