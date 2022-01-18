@@ -4,20 +4,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class ContactsApp{
+
+    // Declares Utilized Imported classes and file-paths for in-class use
     private static Util util = new Util();
     private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
     private static final Path FILE_PATH = Paths.get(FILE_PATH_STRING);
+    // Leave this here to simplify internal methods not included in main
     static List<Contact> myContacts = new ArrayList<>();
 
+
+    /*-------------------MAIN APP METHOD----------------*/
     public static void main(String[] args){
 
 
 
-        /**---------------------------------------------*/
+        /*----------------------Creating the Directory and .txt if none exists-----------------------*/
         String contactFilePath = "src/contactList";
         Path directoryPath = Paths.get(contactFilePath);
         if(Files.notExists(directoryPath)){
@@ -31,6 +35,7 @@ public class ContactsApp{
             if(Files.notExists(txt)){
                 Files.createFile(txt);
             }
+
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
@@ -54,29 +59,47 @@ public class ContactsApp{
             }
             /**-----------------------------------------*/
             //reading from text turns strings creating a new arraylist and add to contacts
+
+   
+        getContacts();
+
+        Boolean running = true;
+        /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
+        /* ------ while loop with a switch inside for user input options ------*/
+
+        while(running){
+
+            // OPTION Printout with input for the switch
+            System.out.println("\nWelcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
+                    "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
+            int option = util.getInt();
+            // System.out.println("You selected: " + option);
+
             switch(option){
                 case 1:
-
-                    System.out.println("Enter a name: ");
-                    util.getString();
-                    util.sc.nextLine();
+                    displayContacts();
                     break;
                 case 2:
+                    addContact();
                     break;
                 case 3:
+
                     findContact();
                     break;
                 case 4:
                     searchContacts();
-                    break;
-                case 5:
+                     break;
 
+                case 5:
+                    running = false;
                     break;
                 default:
                     System.out.println("Switch fallthrough has occurred for option");
             };
+        /* ---------Loop Exit --------*/
+        }
 
-        }while(util.yesNo("Would you like to continue?"));
+        /* --------- Call to write contacts to the .txt output --------*/
         try {
             writeContacts();
         } catch (IOException e) {
@@ -84,37 +107,46 @@ public class ContactsApp{
         }
         System.out.println("Goodbye!");
     }
-
-    private static void findContact() {
-    }
-
-    public static void viewContacts(){
-        Path contactsPath = Paths.get("contactList", "contacts.txt");
-        List<String> contactList = null;
+    /* */
+    public static void getContacts(){
+        List<String> contactStrings;
         try {
-            contactList = Files.readAllLines(contactsPath);
+            contactStrings = Files.readAllLines(FILE_PATH);
+            for(String contact : contactStrings){
+                Contact addMe = new Contact(contact);
+                myContacts.add(addMe);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < contactList.size(); i += 1) {
-            System.out.println((i + 1) + ": " + contactList.get(i));
+
+    }
+    // Displays the table of contacts based on the current ArrayList mycontacts
+    public static void displayContacts(){
+        System.out.println("Name\t|\t Phone Number\n-----------------");
+        for(Contact contact : myContacts){
+            System.out.printf("%s \t|\t %s\n",contact.getFullName(), contact.getPhoneNumber());
         }
     }
+    // Called when add new contact option is selected
+    // 1- receives input for the given fields, 2- creates a new Contact, 3-adds the Contact to the ArrayList
     public static void addContact(){
         String newName = util.getString("Enter in the New Contact's Name:");
         String newNumber = util.getString("Enter the number for "+newName+":");
         Contact newContact = new Contact(newName, newNumber);
         myContacts.add(newContact);
-        System.out.printf("%s has been added to contacts with Phone Number: %s",newContact.getFullName(), newContact.getPhoneNumber());
+        System.out.printf("%s has been added to contacts with Phone Number: %s\n",newContact.getFullName(), newContact.getPhoneNumber());
     }
+    // Called on exit to Stringify the Array of Contacts and write each to a line in the given file
     public static void writeContacts() throws IOException {
-        List<String> stringedContacts= new ArrayList<>();
+        List<String> stringedContacts = new ArrayList<>();
         for(Contact contact : myContacts){
             stringedContacts.add(contact.toFileString());
         }
         Files.write(FILE_PATH, stringedContacts);
     }
+
  
 
 //search and delete
@@ -138,5 +170,6 @@ public class ContactsApp{
         System.out.println("redirect to main");
     }
  
+
 
 }
