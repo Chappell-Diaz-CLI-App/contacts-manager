@@ -125,8 +125,8 @@ public class ContactsApp{
     }
     //search and delete
     public static void searchContacts () {
-        util.getString("Search for contacts by name.");
-        util.getString();
+        String searchedLastName = util.getString("Search for contacts by name.");
+
         Path ContactsPath = Paths.get("data", "contacts.txt");
         List<String> Personlist;
         try {
