@@ -7,4 +7,4 @@
 
 # Compiled output
 *.class
-out/*
+out/*.
