@@ -8,12 +8,10 @@ import java.util.List;
 
 public class ContactsApp{
 
-
     // Declares Utilized Imported classes and file-paths for in-class use
     private static Util util = new Util();
     private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
     private static final Path FILE_PATH = Paths.get(FILE_PATH_STRING);
-    static String reg = "|";
     // Leave this here to simplify internal methods not included in main
     static List<Contact> myContacts = new ArrayList<>();
 
@@ -27,66 +25,46 @@ public class ContactsApp{
         String contactFilePath = "src/contactList";
         Path directoryPath = Paths.get(contactFilePath);
         if (Files.notExists(directoryPath)) {
-
         } else {
             System.out.println("has already been created");
         }
-
         Path txt = Paths.get(contactFilePath, "contacts.txt");
-        try {
-            if (Files.notExists(txt)) {
+        try{
+            if(Files.notExists(txt)){
                 Files.createFile(txt);
             }
-
-
-        } catch (IOException ioe) {
+        }catch (IOException ioe){
             ioe.printStackTrace();
         }
-
         String fullName;
         String phoneNumber;
         Contact c;
-        /*----------------------------*/
-        getContacts();
+            /*----------------------------*/
 
+        getContacts();
 
         Boolean running = true;
         /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
         /* ------ while loop with a switch inside for user input options ------*/
 
-        while (running) {
+        System.out.println("Welcome to ContactsApp!");
+        while(running){
 
             // OPTION Printout with input for the switch
-            System.out.println("\nWelcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
+            System.out.println("-----Menu----- \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
                     "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
             int option = util.getInt();
-
             // System.out.println("You selected: " + option);
-
-            System.out.println("You selected: " + option);
+          
             /**---------------------------------------- */
-            if (option <= 0 || option > 6) {
-                System.out.println("Invalid selection!");
-            }
+       //     if (option <= 0 || option > 6) {
+        //        System.out.println("Invalid selection!");
+       //     }
             /**-----------------------------------------*/
             //reading from text turns strings creating a new arraylist and add to contacts
 
 
-            getContacts();
-
-            Boolean running = true;
-            /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
-            /* ------ while loop with a switch inside for user input options ------*/
-
-            while (running) {
-
-                // OPTION Printout with input for the switch
-                System.out.println("\nWelcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
-                        "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
-                int option = util.getInt();
-                // System.out.println("You selected: " + option);
-
-
+            
                 switch (option) {
                     case 1:
                         displayContacts();
@@ -133,7 +111,6 @@ public class ContactsApp{
                 e.printStackTrace();
             }
 
-
         }
         // Displays the table of contacts based on the current ArrayList mycontacts
         public static void displayContacts () {
@@ -170,6 +147,10 @@ public class ContactsApp{
             }
             Files.write(FILE_PATH, stringedContacts);
         }
+
+       
+}
+
 
 
 //search and delete
@@ -222,4 +203,5 @@ public class ContactsApp{
             System.exit(0);
         }
     }
+
 
