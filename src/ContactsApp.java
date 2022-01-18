@@ -12,6 +12,7 @@ public class ContactsApp{
     private static Util util = new Util();
     private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
     private static final Path FILE_PATH = Paths.get(FILE_PATH_STRING);
+    static String reg = "|";
     // Leave this here to simplify internal methods not included in main
     static List<Contact> myContacts = new ArrayList<>();
 
@@ -100,9 +101,9 @@ public class ContactsApp{
     }
     // Displays the table of contacts based on the current ArrayList mycontacts
     public static void displayContacts(){
-        System.out.println("Name\t|\t Phone Number\n-----------------");
+        System.out.println("Name               |\tPhone Number\n-------------------------------------");
         for(Contact contact : myContacts){
-            System.out.printf("%s \t|\t %s\n",contact.getFullName(), contact.getPhoneNumber());
+            System.out.println(String.format("%-18s %s",contact.getFullName(),"|\t"+contact.getPhoneNumber()));
         }
     }
     // Called when add new contact option is selected
