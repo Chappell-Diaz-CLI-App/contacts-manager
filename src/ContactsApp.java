@@ -54,29 +54,29 @@ public class ContactsApp{
         /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
         /* ------ while loop with a switch inside for user input options ------*/
 
-        while (running) {
-
-            // OPTION Printout with input for the switch
-            System.out.println("\nWelcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
-                    "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
-            int option = util.getInt();
-
-            // System.out.println("You selected: " + option);
-
-            System.out.println("You selected: " + option);
-            /**---------------------------------------- */
-            if (option <= 0 || option > 6) {
-                System.out.println("Invalid selection!");
-            }
-            /**-----------------------------------------*/
-            //reading from text turns strings creating a new arraylist and add to contacts
-
-
-            getContacts();
-
-            Boolean running = true;
-            /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
-            /* ------ while loop with a switch inside for user input options ------*/
+//        while (running) {
+//
+//            // OPTION Printout with input for the switch
+//            System.out.println("\nWelcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
+//                    "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
+//            int option = util.getInt();
+//
+//            // System.out.println("You selected: " + option);
+//
+//            System.out.println("You selected: " + option);
+//            /**---------------------------------------- */
+//            if (option <= 0 || option > 6) {
+//                System.out.println("Invalid selection!");
+//            }
+//            /**-----------------------------------------*/
+//            //reading from text turns strings creating a new arraylist and add to contacts
+//
+//
+//            getContacts();
+//
+//            Boolean running = true;
+//            /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
+//            /* ------ while loop with a switch inside for user input options ------*/
 
             while (running) {
 
@@ -155,13 +155,7 @@ public class ContactsApp{
 
 
     }
-    // Displays the table of contacts based on the current ArrayList mycontacts
-    public static void displayContacts(){
-        System.out.println("Name               |\tPhone Number\n-------------------------------------");
-        for(Contact contact : myContacts){
-            System.out.println(String.format("%-18s %s",contact.getFullName(),"|\t"+contact.getPhoneNumber()));
 
-        }
         // Called on exit to Stringify the Array of Contacts and write each to a line in the given file
         public static void writeContacts () throws IOException {
             List<String> stringedContacts = new ArrayList<>();
