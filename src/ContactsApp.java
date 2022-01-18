@@ -28,15 +28,17 @@ public class ContactsApp{
             try{
                 Files.createFile(FILE_PATH);
             }catch(IOException ioe){
-                    ioe.printStackTrace();
+                   ioe.printStackTrace();
             }
         }else {
             System.out.println("has already been created");
         }
-            String fullName;
-            String phoneNumber;
-            Contact c;
-            /*----------------------------*/
+
+        String fullName;
+        String phoneNumber;
+        Contact c;
+        /*----------------------------*/
+
         getContacts();
 
         Boolean running = true;
@@ -67,7 +69,10 @@ public class ContactsApp{
                 default:
                     System.out.println("Switch fallthrough has occurred for option");
             };
-        /* ---------Loop Exit --------*/
+
+            /* ---------Loop Exit --------*/
+
+
         }
 
         /* --------- Call to write contacts to the .txt output --------*/
@@ -98,6 +103,7 @@ public class ContactsApp{
         System.out.println("Name               |\tPhone Number\n-------------------------------------");
         for(Contact contact : myContacts){
             System.out.println(String.format("%-18s %s",contact.getFullName(),"|\t"+contact.getPhoneNumber()));
+
         }
     }
     // Called when add new contact option is selected
@@ -117,5 +123,49 @@ public class ContactsApp{
         }
         Files.write(FILE_PATH, stringedContacts);
     }
+    //search and delete
+    public static void searchContacts () {
+        util.getString("Search for contacts by name.");
+        util.getString();
+        Path ContactsPath = Paths.get("data", "contacts.txt");
+        List<String> Personlist;
+        try {
+            Personlist = Files.readAllLines(ContactsPath);
+            for (String person : Personlist) {
+                if (person.toLowerCase().contains(searchedLastName.toLowerCase())) {
+                    System.out.println("Contact:\n" + person);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        System.out.println("________________________");
+        System.out.println("redirect to main");
+    }
+
+    public static void deleteContact () {
+        System.out.println("4. Delete contact by name and/or phone number. ");
+        System.out.println(" Name Or Phone: ");
+
+        String searchedName = util.getString();
+        Path ContactsPath = Paths.get("data", "contacts.txt");
+        List<String> Personlist;
+        try {
+            Personlist = Files.readAllLines(ContactsPath);
+            List<String> newList = new ArrayList<>();
+            for (String person : Personlist) {
+                if (person.toLowerCase().contains(searchedName)) {
+                    continue;
+                }
+                newList.add(person);
+            }
+            for (String name : newList) { //or personList?
+                System.out.println(name);
+            }
+            Files.write(Paths.get("data", "contacts.txt"), newList);//overwrites old array
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 }
