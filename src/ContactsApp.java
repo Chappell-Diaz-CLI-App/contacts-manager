@@ -166,51 +166,6 @@ public class ContactsApp{
         }
 
 
-//search and delete
-        public static void searchContacts () {
-            util.getString("Search for contacts by name.");
-            util.getString();
-            Path ContactsPath = Paths.get("data", "contacts.txt");
-            List<String> Personlist;
-            try {
-                Personlist = Files.readAllLines(ContactsPath);
-                for (String person : Personlist) {
-                    if (person.toLowerCase().contains(searchedLastName.toLowerCase())) {
-                        System.out.println("Contact:\n" + person);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-            System.out.println("________________________");
-            System.out.println("redirect to main");
-        }
-
-        public static void deleteContact () {
-            System.out.println("4. Delete contact by name and/or phone number. ");
-            System.out.println(" Name Or Phone: ");
-
-            String searchedName = util.nextLine();
-            Path ContactsPath = Paths.get("data", "contacts.txt");
-            List<String> Personlist;
-            try {
-                Personlist = Files.readAllLines(ContactsPath);
-                List<String> newList = newArrayList <>();
-                for (String person : Personlist) {
-                    if (person.toLowerCase().contains(searchedName)) {
-                        continue;
-                    }
-                    newList.add(person);
-                }
-                for (String name : newList) { //or personList?
-                    System.out.println(name);
-                }
-                Files.write(Paths.get("data", "contacts.txt"), newList);//overwrites old array
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         public static void exit () {
             System.out.println("BYE!!");
             System.exit(0);
