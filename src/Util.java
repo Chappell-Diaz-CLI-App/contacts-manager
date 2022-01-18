@@ -10,7 +10,6 @@ public class Util {
        // System.out.printf("You have entered: %s", userResponse);
         return userResponse;
     }
-
     public String getString(String prompt) {
         System.out.println(prompt);
         String userResponse = sc2.nextLine();

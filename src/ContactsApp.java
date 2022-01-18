@@ -64,6 +64,9 @@ public class ContactsApp {
                 default:
                     System.out.println("Switch fallthrough has occurred for option");
             }
+            // getContinue simply waits for an input, but does not care about the value passed. It pauses before
+            // the next loop iteration in order to prevent overflow of menu display with each function's information.
+            util.getContinue();
             /* ---------Loop Exit --------*/
         }
         /* --------- Call to write contacts to the .txt output --------*/
@@ -95,7 +98,6 @@ public class ContactsApp {
         for (Contact contact : myContacts) {
             System.out.printf("%-18s %s%n", contact.getFullName(), "|\t" + contact.getPhoneNumber());
         }
-        util.getContinue();
     }
 
     // Called when add new contact option is selected
@@ -128,7 +130,6 @@ public class ContactsApp {
                 System.out.println("Contact:\nName: " + person.getFullName() + "\nPhone: " + person.getPhoneNumber());
             }
         }
-        util.getContinue();
     }
     public static void deleteContact(){
         System.out.println("You Selected: 4) Delete Contact. ");
@@ -144,23 +145,5 @@ public class ContactsApp {
                 }
             }
         }
-        util.getContinue();
-            /*try {
-
-                List<String> newList = new ArrayList<>();
-                for (String person : myContacts) {
-                    if (person.toLowerCase().contains(searchedName)) {
-                        continue;
-                    }
-                    newList.add(person);
-                }
-                for (String name : newList) { //or personList?
-                    System.out.println(name);
-                }
-                Files.write(Paths.get("data", "contacts.txt"), newList);//overwrites old array
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
-
     }
 }
