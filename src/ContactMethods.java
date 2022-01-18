@@ -14,23 +14,20 @@ public class ContactMethods {
 
     private HashMap<String, Contact> contacts = new HashMap<>();
 
-
     Util util = new Util();
+    public ContactMethods(){
+        List<String> listOfContacts = new ArrayList<>();
 
-  public ContactMethods(){
-       List<String> listOfContacts = new ArrayList<>();
         try {
             listOfContacts = Files.readAllLines(FILE_PATH);
-        } catch (IOException ioe) {
+        }catch(IOException ioe){
             ioe.printStackTrace();
         }
-        for (String contactString : listOfContacts) {
+        for(String contactString : listOfContacts){
             Contact contact = new Contact(contactString);
             contacts.putIfAbsent(contact.getPhoneNumber(), contact);
         }
     }
-
-
     //save, add, remove, find
     public void saveContacts() {
 
@@ -52,6 +49,7 @@ public class ContactMethods {
            //     if (person.toLowerCase().contains(searchContacts().getName()).toLowerCase()) {
                     System.out.println("Contact:\n" + person);
 
+
                 }
             }
         }catch (IOException e) {
@@ -64,4 +62,4 @@ public class ContactMethods {
 
  
 
- 
+

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ContactsApp{
 
+
     // Declares Utilized Imported classes and file-paths for in-class use
     private static Util util = new Util();
     private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
@@ -31,17 +32,45 @@ public class ContactsApp{
         }
 
         Path txt = Paths.get(contactFilePath, "contacts.txt");
-            try{
-                if(Files.notExists(txt)){
-                    Files.createFile(txt);
-                }
-            }catch (IOException ioe){
-                ioe.printStackTrace();
+        try{
+            if(Files.notExists(txt)){
+                Files.createFile(txt);
             }
+
+
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+
             String fullName;
             String phoneNumber;
             Contact c;
             /*----------------------------*/
+        getContacts();
+
+
+        Boolean running = true;
+        /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
+        /* ------ while loop with a switch inside for user input options ------*/
+
+        while(running){
+
+            // OPTION Printout with input for the switch
+            System.out.println("\nWelcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
+                    "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
+            int option = util.getInt();
+
+            // System.out.println("You selected: " + option);
+
+            System.out.println("You selected: " + option);
+            /**---------------------------------------- */
+            if(option <= 0 || option > 6){
+                System.out.println("Invalid selection!");
+            }
+            /**-----------------------------------------*/
+            //reading from text turns strings creating a new arraylist and add to contacts
+
+   
         getContacts();
 
         Boolean running = true;
@@ -55,6 +84,8 @@ public class ContactsApp{
                     "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
             int option = util.getInt();
             // System.out.println("You selected: " + option);
+ 
+
             switch(option){
                 case 1:
                     displayContacts();
@@ -63,9 +94,15 @@ public class ContactsApp{
                     addContact();
                     break;
                 case 3:
+
                     break;
+                c
                 case 4:
-                    break;
+
+                    searchContacts();
+                     break;
+
+
                 case 5:
                     running = false;
                     break;
@@ -74,6 +111,8 @@ public class ContactsApp{
             };
         /* ---------Loop Exit --------*/
         }
+
+
 
         /* --------- Call to write contacts to the .txt output --------*/
         try {
@@ -122,5 +161,30 @@ public class ContactsApp{
         }
         Files.write(FILE_PATH, stringedContacts);
     }
+
+
+
+//search and delete
+    public static void searchContacts(){
+        util.getString("Search for contacts by name.");
+        util.getString();
+        Path ContactsPath = Paths.get("data", "contacts.txt");
+        List<String> Personlist;
+        try{
+            Personlist = Files.readAllLines(ContactsPath);
+            for(String person : Personlist){
+                if(person.toLowerCase().contains(searchedLastName.toLowerCase())){
+                    System.out.println("Contact:\n" + person);
+                }
+            }
+        }catch  (IOException e){
+            e.printStackTrace();
+
+        }
+        System.out.println("________________________");
+        System.out.println("redirect to main");
+    }
+
+
 
 }
