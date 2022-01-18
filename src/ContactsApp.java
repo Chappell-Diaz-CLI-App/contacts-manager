@@ -13,6 +13,7 @@ public class ContactsApp{
     private static Util util = new Util();
     private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
     private static final Path FILE_PATH = Paths.get(FILE_PATH_STRING);
+    static String reg = "|";
     // Leave this here to simplify internal methods not included in main
     static List<Contact> myContacts = new ArrayList<>();
 
@@ -141,6 +142,7 @@ public class ContactsApp{
                 System.out.printf("%s \t|\t %s\n", contact.getFullName(), contact.getPhoneNumber());
             }
         }
+
         // Called when add new contact option is selected
         // 1- receives input for the given fields, 2- creates a new Contact, 3-adds the Contact to the ArrayList
         public static void addContact () {
@@ -149,6 +151,16 @@ public class ContactsApp{
             Contact newContact = new Contact(newName, newNumber);
             myContacts.add(newContact);
             System.out.printf("%s has been added to contacts with Phone Number: %s\n", newContact.getFullName(), newContact.getPhoneNumber());
+
+
+
+    }
+    // Displays the table of contacts based on the current ArrayList mycontacts
+    public static void displayContacts(){
+        System.out.println("Name               |\tPhone Number\n-------------------------------------");
+        for(Contact contact : myContacts){
+            System.out.println(String.format("%-18s %s",contact.getFullName(),"|\t"+contact.getPhoneNumber()));
+
         }
         // Called on exit to Stringify the Array of Contacts and write each to a line in the given file
         public static void writeContacts () throws IOException {

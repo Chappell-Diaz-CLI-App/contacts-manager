@@ -32,7 +32,7 @@ public class Contact {
             return "Name: " + fullName + ", Number: " + phoneNumber;
         }
         public String toFileString () {
-            return fullName + " | " + phoneNumber;
+            return fullName + "|" + phoneNumber;
         }
     }
 
