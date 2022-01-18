@@ -2,16 +2,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class ContactsApp{
-
+    private static Util util = new Util();
+    private static final String FILE_PATH_STRING = "src/contactList/contacts.txt";
+    private static final Path FILE_PATH = Paths.get(FILE_PATH_STRING);
+    static List<Contact> myContacts = new ArrayList<>();
 
     public static void main(String[] args){
-        Util util = new Util();
+
 
 
         /**---------------------------------------------*/
@@ -24,55 +27,61 @@ public class ContactsApp{
         }
 
         Path txt = Paths.get(contactFilePath, "contacts.txt");
-            try{
-                if(Files.notExists(txt)){
-                    Files.createFile(txt);
-                }
-            }catch (IOException ioe){
-                ioe.printStackTrace();
+        try{
+            if(Files.notExists(txt)){
+                Files.createFile(txt);
             }
-            String fullName;
-            String phoneNumber;
-            Contact c;
-            /**----------------------------*/
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        String fullName;
+        String phoneNumber;
+        Contact c;
+        /**----------------------------*/
 
-        HashMap<String, Contact> myContacts = new HashMap<>();
+
         Boolean goOn;
 
         do {
-        //while(running){
+            //while(running){
             System.out.println("Welcome to ContactsApp! \n1. View contacts.\n2. Add a new contact.\n3. Search a contact by name." +
-                    "\n4.Delete and existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
+                    "\n4. Delete an existing contact.\n5. Exit.\nEnter an option(1,2,3,4, or 5.)");
             int option = util.getInt();
             System.out.println("You selected: " + option);
-           /**---------------------------------------- */
+            /**---------------------------------------- */
             if(option <= 0 || option > 6){
                 System.out.println("Invalid selection!");
             }
-           /**-----------------------------------------*/
+            /**-----------------------------------------*/
             //reading from text turns strings creating a new arraylist and add to contacts
             switch(option){
                 case 1:
+
                     System.out.println("Enter a name: ");
                     util.getString();
                     util.sc.nextLine();
                     break;
                 case 2:
-                addContact();
                     break;
                 case 3:
-                findContact();
+                    findContact();
                     break;
                 case 4:
-                searchContacts();
+                    searchContacts();
                     break;
                 case 5:
+
                     break;
                 default:
                     System.out.println("Switch fallthrough has occurred for option");
             };
 
         }while(util.yesNo("Would you like to continue?"));
+        try {
+            writeContacts();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Goodbye!");
     }
 
@@ -93,8 +102,39 @@ public class ContactsApp{
         }
     }
     public static void addContact(){
-
+        String newName = util.getString("Enter in the New Contact's Name:");
+        String newNumber = util.getString("Enter the number for "+newName+":");
+        Contact newContact = new Contact(newName, newNumber);
+        myContacts.add(newContact);
+        System.out.printf("%s has been added to contacts with Phone Number: %s",newContact.getFullName(), newContact.getPhoneNumber());
     }
+    public static void writeContacts() throws IOException {
+        List<String> stringedContacts= new ArrayList<>();
+        for(Contact contact : myContacts){
+            stringedContacts.add(contact.toFileString());
+        }
+        Files.write(FILE_PATH, stringedContacts);
+    }
+
 //search and delete
+    public static void searchContacts(){
+        util.getString("Search for contacts by name.");
+        util.getString();
+        Path ContactsPath = Paths.get("data", "contacts.txt");
+        List<String> Personlist;
+        try{
+            Personlist = Files.readAllLines(ContactsPath);
+            for(String person : Personlist){
+                if(person.toLowerCase().contains(searchedLastName.toLowerCase())){
+                    System.out.println("Contact:\n" + person);
+                }
+            }
+        }catch  (IOException e){
+            e.printStackTrace();
+
+        }
+        System.out.println("________________________");
+        System.out.println("redirect to main");
+    }
 
 }
