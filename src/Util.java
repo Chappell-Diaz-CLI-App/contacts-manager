@@ -20,4 +20,9 @@ public class Util {
     public int getInt(){
         return sc.nextInt();
     }
+    public boolean yesNo(String prompt){
+        System.out.println(prompt);
+        String inputString = sc.next();
+        return  (inputString.equalsIgnoreCase("y") || inputString.equalsIgnoreCase("true") || inputString.equalsIgnoreCase("yes"));
+    }
 }

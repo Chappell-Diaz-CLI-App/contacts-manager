@@ -15,11 +15,8 @@ public class ContactsApp {
     // Leave this here to simplify internal methods not included in main
     static List<Contact> myContacts = new ArrayList<>();
 
-
     /*-------------------MAIN APP METHOD----------------*/
     public static void main(String[] args) {
-
-
 
         /*----------------------Creating the Directory and .txt if none exists-----------------------*/
         if (Files.notExists(FILE_PATH)) {
@@ -32,31 +29,40 @@ public class ContactsApp {
             System.out.println("has already been created");
         }
 
-
         getContacts();
         boolean running = true;
         /* ---------------- PRIMARY CONTROL STRUCTURE FOR THE APP  ---------------*/
         /* ------ while loop with a switch inside for user input options ------*/
         System.out.println("Welcome to ContactsApp!");
         while (running) {
-
             // OPTION Printout with input for the switch
             System.out.println("-----Menu----- \n" +
-                               "1. View contacts.\n" +
-                               "2. Add a new contact.\n" +
-                               "3. Search a contact by name.\n" +
-                               "4. Delete an existing contact.\n" +
-                               "5. Exit.\n" +
-                               "Enter an option(1,2,3,4, or 5.)");
+                   "1. View contacts.\n" +
+                   "2. Add a new contact.\n" +
+                   "3. Search a contact by name.\n" +
+                   "4. Delete an existing contact.\n" +
+                   "5. Exit.\n" +
+                   "Enter an option(1,2,3,4, or 5.)");
             int option = util.getInt();
             // System.out.println("You selected: " + option);
             switch (option) {
-                case 1 -> displayContacts();
-                case 2 -> addContact();
-                case 3 -> searchContacts();
-                case 4 -> deleteContact();
-                case 5 -> running = false;
-                default -> System.out.println("Switch fallthrough has occurred for option");
+                case 1:
+                    displayContacts();
+                    break;
+                case 2:
+                    addContact();
+                    break;
+                case 3:
+                    searchContacts();
+                    break;
+                case 4:
+                    deleteContact();
+                    break;
+                case 5:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Switch fallthrough has occurred for option");
             }
             /* ---------Loop Exit --------*/
         }
@@ -69,7 +75,7 @@ public class ContactsApp {
         System.out.println("Goodbye!");
     }
 
-    /* */
+    /* Reads all Contacts from .txt File and utilizes a separate constructor to create a Contact from each line and add them to the ArrayList*/
     public static void getContacts() {
         List<String> contactStrings;
         try {
@@ -127,7 +133,18 @@ public class ContactsApp {
     public static void deleteContact(){
         System.out.println("You Selected: 4) Delete Contact. ");
         String deleteParameter = util.getString("Enter a Name or Phone Number");
-
+        for (Contact person : myContacts) {
+            String name = person.getFullName();
+            if (person.getFullName().equalsIgnoreCase(deleteParameter) || person.getPhoneNumber().equals(deleteParameter)){
+                System.out.println("Contact:\nName: " + person.getFullName() + "\nPhone: " + person.getPhoneNumber());
+                if(util.yesNo("Would you like to delete this contact?")){
+                    System.out.println(person.getFullName()+" has been deleted");
+                    myContacts.remove(person);
+                    break;
+                }
+            }
+        }
+        util.getContinue();
             /*try {
 
                 List<String> newList = new ArrayList<>();
