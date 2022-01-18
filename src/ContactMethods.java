@@ -49,12 +49,12 @@ public class ContactMethods {
         try {
             listOfContacts = Files.readAllLines(FILE_PATH);
             for (String person : listOfContacts) {
-                if (person.toLowerCase().contains(searchContacts().getName()).toLowerCase()) {
+           //     if (person.toLowerCase().contains(searchContacts().getName()).toLowerCase()) {
                     System.out.println("Contact:\n" + person);
 
                 }
             }
-        } catch (IOException e) {
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
