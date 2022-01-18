@@ -43,7 +43,7 @@ public class ContactMethods {
     public void contactList() {
 
     }
-
+/*
     public void searchContacts() {
         List<String> listOfContacts;
         try {
@@ -57,7 +57,7 @@ public class ContactMethods {
         }catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
  
  
